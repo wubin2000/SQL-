@@ -7,3 +7,35 @@ alter user （ユーザー名） identified by （パスワード）;
 ユーザーにおけるall_tables:
 select table_name from all_tables where owner = '(ユーザー名（大文字）)';
 
+１．下記のソフトをインストールする。  
+・Oracle 11g Express Edition   
+・Oracle SQL Developer
+
+２．接続設定(サービス名およびSID)情報を確認する。　
+・C:\oraclexe\app\oracle\product\11.2.0\server\network\ADMIN\tnsnames.ora を確認(一般的には XE らしい)
+
+３．「Oracle SQL Developer」で接続を新規追加する。　
+・接続名　　：Local環境　
+・ユーザ名　：system　
+・パスワード：XXXXX(「Oracle 11g Express Edition」をインストールする時、入力したパスワードを設定)
+
+４．新規の接続用のユーザを作成する。　
+・CREATE USER testUser IDENTIFIED BY "testUser"  --ユーザ作成
+
+→12Cの場合：　CREATE USER c##testUser IDENTIFIED BY "testUser"
+
+・GRANT DBA TO testUser 
+
+--DBAロールを付与　　
+→12Cの場合：　GRANT DBA TO c##testUser　
+
+・GRANT UNLIMITED TABLESPACE TO testUser
+
+--表領域の使用量を無制限にする　　
+→12Cの場合：　GRANT UNLIMITED TABLESPACE TO c##testUser
+
+５．権限を確認する　　SELECT * FROM user_sys_privs;　　
+-- または　　SELECT * FROM session_privs;　　
+-- または　　SELECT * FROM dba_sys_privs;
+
+※参考サイト：　https://qiita.com/heignamerican/items/5e69f7590378f2f00549

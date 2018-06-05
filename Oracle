@@ -1,0 +1,9 @@
+unlock:
+alter user (table名) account unlock;
+
+ユーザー名とパスワードの変更：
+alter user （ユーザー名） identified by （パスワード）;
+
+ユーザーにおけるall_tables:
+select table_name from all_tables where owner = '(ユーザー名（大文字）)';
+
